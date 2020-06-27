@@ -1,0 +1,60 @@
+-- SQL QUE BUSCA PRODUTOS QUE:
+-- QUANTIDADE EM ESTOQUE
+-- QUE TENHAO IMAGEM CADASTRADA
+-- MOSTRA A DESCRIÇÃO, IMAGEM E O PREÇO DE VENDA DOS PRODUTOS
+SELECT I.descricao, I.imagem, I.precovenda FROM item AS I INNER JOIN estoque AS E ON I.imagem != '' AND I.coditem = E.coditem AND
+ I.codempitem = E.codempitem WHERE E.qtd > 0 GROUP BY I.descricao, I.imagem, I.precovenda
+-- INNER JOIN ENTRE TABELA ITEM E TABELA ESTOQUE
+
+
+
+-- SQL QUE BUSCA PRODUTOS QUE:
+-- QUANTIDADE EM ESTOQUE
+-- QUE TENHAO IMAGEM CADASTRADA
+-- EM ORDEM DECRESCENTE POR DATA DE CADASTRO(MAIS NOVOS CADASTRADOS)
+-- MOSTRA SOMENTE OS PRODUTOS QUE NÃO ESTÃO COM O NIVEL "ESTOCADO"
+-- LIMITE PREVIAMENTE CADASTRADO DE 10 (PODE SE MUDAR)
+-- MOSTRA A DESCRIÇÃO, IMAGEM E O PREÇO DE VENDA DOS PRODUTOS
+SELECT I.descricao, I.imagem, I.precovenda, I.datacadastro FROM item AS I INNER JOIN estoque AS E ON I.imagem != '' AND I.nivel1 != 10000460 AND I.coditem = E.coditem AND
+ I.codempitem = E.codempitem WHERE E.qtd > 0 GROUP BY I.descricao, I.imagem, I.precovenda, I.datacadastro ORDER BY I.datacadastro DESC LIMIT 10
+-- INNER JOIN ENTRE TABELA ITEM E TABELA ESTOQUE
+
+
+
+-- SQL QUE BUSCA PRODUTOS QUE:
+-- QUE TENHAO IMAGEM CADASTRADA
+SELECT * FROM item WHERE codempitem = 1 AND coditem = 1480
+
+SELECT SUM(qtd) FROM estoque WHERE codempitem = 1 AND coditem = 1480 AND codempresa = 2 AND qtd > 0
+
+SELECT I.descricao, I.imagem, I.precovenda FROM item AS I INNER JOIN estoque AS E ON I.imagem != '' AND I.coditem = E.coditem AND
+ I.codempitem = E.codempitem WHERE E.qtd > 0 GROUP BY I.descricao, I.imagem, I.precovenda, I.datacadastro
+
+
+
+
+
+select * from item where coditem = 83 and codempitem = 2
+
+
+
+select * from estoque where coditem = 1480 AND codempitem = 1
+
+
+select * from estoque WHERE coditem = 1480
+
+select * from tamanho
+
+NOVAS PESQUISAS
+
+SELECT I.descricao, I.imagem, I.precovenda, I.datacadastro FROM item AS I
+INNER JOIN estoque AS E ON I.imagem != '' AND I.nivel1 != 10000460 AND I.coditem = E.coditem
+AND I.codempitem = E.codempitem WHERE E.qtd > 0 AND E.codempresa = 2 GROUP BY I.descricao, I.imagem, I.precovenda, I.datacadastro
+ORDER BY I.datacadastro DESC LIMIT 10
+
+SELECT * FROM item
+
+SELECT M.descricao, M.imagem FROM marca AS M
+INNER JOIN item AS I ON M.codmarca = I.codmarca AND M.imagem != ''
+INNER JOIN estoque AS E ON I.imagem != '' AND I.nivel1 != 10000460 AND I.coditem = E.coditem AND I.codempitem = E.codempitem WHERE E.qtd > 0 AND E.codempresa = 4 
+GROUP BY M.codmarca, M.imagem
